@@ -20,7 +20,7 @@ export class AgentService {
     private http: HttpClient) { }
 
   listen(server: string, identity: string, contract: string): EventSource {
-    return new EventSource(`${server}stream/${identity}/${contract}`);
+    return new EventSource(`${server}stream?agent=${identity}&contract=${contract}`);
   }
 
   write(server: string, identity: string, contract: string, method: Method): Observable<any> {

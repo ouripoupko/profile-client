@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
     this.contract = this.route.snapshot.paramMap.get('contract') as string;
     this.onRead();
     this.agentService.listen(this.server, this.agent, this.contract).addEventListener('message', message => {
-      if(message.data=="True") {
+      if(message.data.length > 0) {
         this.onRead();
       }
     });
