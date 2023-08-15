@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
+import { OopsComponent } from './oops/oops.component';
 
 const routes: Routes = [
-  { path: ':server/:agent/:contract', component: ProfileComponent }
+  { path: '', component: ProfileComponent },
+  { path: 'oops', component: OopsComponent }
 ];
 
 @NgModule({
