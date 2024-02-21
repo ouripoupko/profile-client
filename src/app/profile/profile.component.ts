@@ -72,4 +72,64 @@ export class ProfileComponent implements OnInit {
     });
     this.isDisabled = true;
   }
+
+  resizeImage(file:File, maxWidth:number, maxHeight:number):Promise<string> {
+    return new Promise((resolve, reject) => {
+      let image = new Image();
+      image.src = URL.createObjectURL(file);
+      image.onload = () => {
+        let width = image.width;
+        let height = image.height;
+        
+        if (width <= maxWidth && height <= maxHeight) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            if (e.target?.result) {
+              resolve(e.target.result as string);
+            } else {
+              reject(new Error('Error reading file'));
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+
+        let newWidth;
+        let newHeight;
+
+        if (width > height) {
+            newHeight = height * (maxWidth / width);
+            newWidth = maxWidth;
+        } else {
+            newWidth = width * (maxHeight / height);
+            newHeight = maxHeight;
+        }
+
+        let canvas = document.createElement('canvas');
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+
+        let context = canvas.getContext('2d');
+
+        if (context) {
+          context.drawImage(image, 0, 0, newWidth, newHeight);
+        }
+
+        resolve(canvas.toDataURL('image/jpeg'));
+
+      };
+      image.onerror = reject;
+    });
+  }
+
+  onFileSelected(event: any) {
+    if(event.target.files.length > 0) {
+      this.resizeImage(event.target.files[0], 200, 200).then(dataUrl => {
+        this.imageURL = dataUrl;
+        this.isDisabled = false;
+        console.log('imageURL', this.imageURL);
+      }, err => {
+        console.error("Photo error", err);
+      });
+    }
+  }
 }

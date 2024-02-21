@@ -13,10 +13,8 @@
 </div>
 
 <div>
-  <mat-form-field appearance="fill">
-    <mat-label>Profile Image</mat-label>
-    <input matInput type="text" [(ngModel)]="imageURL" (input)="isDisabled = false">
-  </mat-form-field>
+  <input type="file" style="display:none" (change)="onFileSelected($event)" #fileUpload/>
+  <button mat-raised-button color="primary" (click)="fileUpload.click()" class="browse-button">Upload profile image</button>
 </div>
 
 <div>
