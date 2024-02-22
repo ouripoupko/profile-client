@@ -132,4 +132,9 @@ export class ProfileComponent implements OnInit {
       });
     }
   }
+
+  cameraSupported() {
+    let el = document.createElement('input');
+    return el.capture != undefined;
+  }
 }

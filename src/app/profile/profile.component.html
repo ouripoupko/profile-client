@@ -11,10 +11,19 @@
     <input matInput type="text" [(ngModel)]="lastName" (input)="isDisabled = false">
   </mat-form-field>
 </div>
-
 <div>
-  <input type="file" style="display:none" (change)="onFileSelected($event)" #fileUpload/>
-  <button mat-raised-button color="primary" (click)="fileUpload.click()" class="browse-button">Upload profile image</button>
+  Profile image
+</div>
+<div>
+  <ng-container *ngIf="cameraSupported()">
+    <input type="file" style="display:none" accept="image/*" capture="user" (change)="onFileSelected($event)" #camera/>
+    <button mat-raised-button color="primary" (click)="camera.click()" class="browse-button">
+      <mat-icon>photo_camera</mat-icon>
+    </button>
+    or
+  </ng-container>
+  <input type="file" style="display:none" accept="image/*" (change)="onFileSelected($event)" #fileUpload/>
+  <button mat-raised-button color="primary" (click)="fileUpload.click()" class="browse-button">Upload</button>
 </div>
 
 <div>

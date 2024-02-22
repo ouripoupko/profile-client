@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OopsComponent } from './oops/oops.component';
 
@@ -27,6 +28,7 @@ import { OopsComponent } from './oops/oops.component';
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
+    MatIconModule,
     BrowserAnimationsModule
   ],
   providers: [],
