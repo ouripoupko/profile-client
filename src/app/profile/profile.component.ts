@@ -57,16 +57,10 @@ export class ProfileComponent implements OnInit {
 
   onWrite(event: any) {
     let method = {} as Method;
-    method.name = 'set_value';
-    method.values = {'key': 'first_name', 'value': this.firstName || ''};
-    this.agentService.write(this.server, this.agent, this.contract, method).subscribe((succeed) => {
-      console.log(succeed);
-    });
-    method.values = {'key': 'last_name', 'value': this.lastName || ''};
-    this.agentService.write(this.server, this.agent, this.contract, method).subscribe((succeed) => {
-      console.log(succeed);
-    });
-    method.values = {'key': 'image_url', 'value': this.imageURL || ''};
+    method.name = 'set_values';
+    method.values = {'items': {'first_name': this.firstName || '',
+                               'last_name': this.lastName || '',
+                               'image_url': this.imageURL || ''}};
     this.agentService.write(this.server, this.agent, this.contract, method).subscribe((succeed) => {
       console.log(succeed);
     });
